@@ -5,7 +5,7 @@ import Axios from 'axios';
 
 /* action name creator */
 //const reducerName = 'products';
-const createActionName = (name, reducerName) => `app/${reducerName}/${name}`;
+const createActionName = (reducerName, name) => `app/${reducerName}/${name}`;
 
 /* action types */
 const FETCH_START = createActionName('FETCH_START');
@@ -19,18 +19,10 @@ export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = payload => ({ payload, type: FETCH_ERROR });
 export const fetchOneProduct = payload => ({ payload, type: FETCH_ONE_PRODUCT });
 
-const headers = {
-  'Accept': 'application/json',
-  'Authorization': 'Bearer wVMOQYpJGsvrtWDjNQjq',
-};
-
 /* thunk creators */
 export const fetchBooks = () => {
   return (dispatch, getState) => {
     Axios
-      /* .get('https://the-one-api.dev/v2/book', {
-        headers: headers,
-      }) */
       .get('http://localhost:8000/api/books')
       .then(res => {
         console.log('res.data: ', res.data);
