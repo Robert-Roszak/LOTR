@@ -15,7 +15,8 @@ const Component = ({className}) => {
       <h2>Homepage</h2>
       <Container>
         <Row className="g-4">
-          <a href='/books'>show books</a>
+          <a href='/books'>Show books</a>
+          <a href='/movies'>Show movies</a>
         </Row>
       </Container>
     </div>

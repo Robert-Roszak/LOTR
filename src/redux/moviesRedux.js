@@ -1,11 +1,8 @@
 import Axios from 'axios';
 
-/* selectors */
-//export const getAll = ({products}) => products.data;
-
 /* action name creator */
-//const reducerName = 'products';
-const createActionName = (reducerName, name) => `app/${reducerName}/${name}`;
+const reducerName = 'movies';
+const createActionName = (name) => `app/${reducerName}/${name}`;
 
 /* action types */
 const FETCH_START = createActionName('FETCH_START');
@@ -20,12 +17,12 @@ export const fetchError = payload => ({ payload, type: FETCH_ERROR });
 export const fetchOneProduct = payload => ({ payload, type: FETCH_ONE_PRODUCT });
 
 /* thunk creators */
-export const fetchBooks = () => {
+export const fetchMovies = () => {
   return (dispatch, getState) => {
+    dispatch(fetchStarted());
     Axios
-      .get('http://localhost:8000/api/books')
+      .get('http://localhost:8000/api/movies')
       .then(res => {
-        console.log('res.data: ', res.data);
         dispatch(fetchSuccess(res.data));
       })
       .catch(err => {
@@ -34,31 +31,25 @@ export const fetchBooks = () => {
   };
 };
 
-export const fetchProducts = () => {
-  return (dispatch, getState) => {
-    const { products } = getState();
-    if (products.data.length === 0 && products.loading.active === false) {
-      dispatch(fetchStarted());
-      Axios
-        .get('http://localhost:8000/api/products')
-        .then(res => {
-          dispatch(fetchSuccess(res.data));
-        })
-        .catch(err => {
-          dispatch(fetchError(err.message || true));
-        });
-    }
-  };
-};
-
-export const fetchOneProductFromAPI = (_id) => {
+export const fetchOneMovie = (_id) => {
   return (dispatch, getState) => {
     dispatch(fetchStarted());
-    Axios.get(`http://localhost:8000/api/products/${_id}`)
-      .then((res) => {
-        dispatch(fetchOneProduct(res.data));
-      })
-      .catch((err) => {
+    let one = `http://localhost:8000/api/movies/${_id}`;
+    let two = `http://localhost:8000/api/movies/${_id}/quote`;
+
+    const requestOne = Axios.get(one);
+    const requestTwo = Axios.get(two);
+
+    Axios
+      .all([requestOne, requestTwo])
+      .then(
+        Axios.spread((...responses) => {
+          let movie = {};
+          console.log('responses: ', responses);
+          movie.movieDetails = responses[0].data.docs;
+          movie.quotes = responses[1].data.docs;
+          dispatch(fetchSuccess(movie));
+        })).catch(err => {
         dispatch(fetchError(err.message || true));
       });
   };

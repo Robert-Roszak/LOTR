@@ -8,9 +8,9 @@ import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import { Homepage } from './components/views/Homepage/Homepage';
 import { Books } from './components/views/Books/Books';
 import { Book } from './components/views/Book/Book';
-/* import { Movies } from './components/views/Movies/Movies';
+import { Movies } from './components/views/Movies/Movies';
 import { Movie } from './components/views/Movie/Movie';
-import { Characters } from './components/views/Characters/Characters';
+/* import { Characters } from './components/views/Characters/Characters';
 import { Character } from './components/views/Character/Character';
 import { Quotes } from './components/views/Quotes/Quotes';
 import { Quote } from './components/views/Quote/Quote';
@@ -26,9 +26,9 @@ const App = () => (
           <Route exact path='/' component={Homepage} />
           <Route exact path='/books' component={Books} />
           <Route exact path='/books/:id' component={Book} />
-          {/*   <Route exact path='/movies' component={Movies} />
+          <Route exact path='/movies' component={Movies} />
           <Route exact path='/movies/:id' component={Movie} />
-          <Route exact path='/characters' component={Characters} />
+          {/* <Route exact path='/characters' component={Characters} />
           <Route exact path='/characters/:id' component={Character} />
           <Route exact path='/quotes' component={Quotes} />
           <Route exact path='/quotes/:id' component={Quote} />
