@@ -25,7 +25,6 @@ export const fetchBooks = () => {
     Axios
       .get('http://localhost:8000/api/books')
       .then(res => {
-        console.log('res.data: ', res.data);
         dispatch(fetchSuccess(res.data));
       })
       .catch(err => {

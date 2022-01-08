@@ -45,7 +45,6 @@ export const fetchOneMovie = (_id) => {
       .then(
         Axios.spread((...responses) => {
           let movie = {};
-          console.log('responses: ', responses);
           movie.movieDetails = responses[0].data.docs;
           movie.quotes = responses[1].data.docs;
           dispatch(fetchSuccess(movie));

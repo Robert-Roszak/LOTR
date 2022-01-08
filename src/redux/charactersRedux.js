@@ -1,11 +1,8 @@
 import Axios from 'axios';
 
-/* selectors */
-//export const getAll = ({products}) => products.data;
-
 /* action name creator */
-//const reducerName = 'products';
-const createActionName = (reducerName, name) => `app/${reducerName}/${name}`;
+const reducerName = 'characters';
+const createActionName = (name) => `app/${reducerName}/${name}`;
 
 /* action types */
 const FETCH_START = createActionName('FETCH_START');
@@ -20,47 +17,51 @@ export const fetchError = payload => ({ payload, type: FETCH_ERROR });
 export const fetchOneProduct = payload => ({ payload, type: FETCH_ONE_PRODUCT });
 
 /* thunk creators */
-export const fetchBooks = () => {
+export const fetchCharacters = (limit, page) => {
   return (dispatch, getState) => {
-    Axios
-      .get('http://localhost:8000/api/books')
-      .then(res => {
-        console.log('res.data: ', res.data);
-        dispatch(fetchSuccess(res.data));
-      })
-      .catch(err => {
-        dispatch(fetchError(err.message || true));
-      });
-  };
-};
-
-export const fetchProducts = () => {
-  return (dispatch, getState) => {
-    const { products } = getState();
-    if (products.data.length === 0 && products.loading.active === false) {
-      dispatch(fetchStarted());
+    const { characters } = getState();
+    if (Object.keys(characters).length !== 0) {
+      if ((page !== characters.data.page || limit !== characters.data.limit) && !characters.data.searchActive) {
+        Axios
+          .get(`http://localhost:8000/api/characters?limit=${limit}&page=${page}`)
+          .then(res => {
+            res.data.searchActive = false;
+            dispatch(fetchSuccess(res.data));
+          })
+          .catch(err => {
+            dispatch(fetchError(err.message || true));
+          });
+      }
+    }
+    else {
       Axios
-        .get('http://localhost:8000/api/products')
+        .get(`http://localhost:8000/api/characters?limit=${limit}&page=${page}`)
         .then(res => {
+          res.data.searchActive = false;
           dispatch(fetchSuccess(res.data));
         })
         .catch(err => {
           dispatch(fetchError(err.message || true));
         });
     }
+
   };
 };
 
-export const fetchOneProductFromAPI = (_id) => {
+export const fetchCharactersFilters = (limit, page, filter, searchText) => {
   return (dispatch, getState) => {
-    dispatch(fetchStarted());
-    Axios.get(`http://localhost:8000/api/products/${_id}`)
-      .then((res) => {
-        dispatch(fetchOneProduct(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchError(err.message || true));
-      });
+    const { characters } = getState();
+    if (page === characters.data.page || limit === characters.data.limit) {
+      Axios
+        .get(`http://localhost:8000/api/characters/filters?limit=${limit}&page=${page}&${filter}=${searchText}`)
+        .then(res => {
+          res.data.searchActive = true;
+          dispatch(fetchSuccess(res.data));
+        })
+        .catch(err => {
+          dispatch(fetchError(err.message || true));
+        });
+    }
   };
 };
 

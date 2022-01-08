@@ -23,7 +23,6 @@ const Component = ({className}) => {
   },[dispatch]);
 
   const movies = useSelector((state) => state.movies.data);
-  console.log('movies: ', movies);
 
   if (movies) {
     return (

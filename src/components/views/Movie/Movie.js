@@ -22,14 +22,10 @@ const Component = ({className}) => {
   },[dispatch, id]);
 
   const movie = useSelector((state) => state.movies.data);
-  console.log('movie: ', movie);
-
 
   if (movie) {
     const details = movie.movieDetails[0];
     const quotes = movie.quotes;
-    console.log('details: ', details);
-    console.log('quotes: ', quotes);
     return (
       <Container className={clsx(className, styles.root)}>
         <Row className="justify-content-md-center">
