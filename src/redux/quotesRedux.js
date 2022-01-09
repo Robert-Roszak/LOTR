@@ -1,29 +1,24 @@
 import Axios from 'axios';
 
-/* selectors */
-//export const getAll = ({products}) => products.data;
-
 /* action name creator */
-//const reducerName = 'products';
-const createActionName = (reducerName, name) => `app/${reducerName}/${name}`;
+const reducerName = 'quotes';
+const createActionName = name => `app/${reducerName}/${name}`;
 
 /* action types */
 const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
 const FETCH_ERROR = createActionName('FETCH_ERROR');
-const FETCH_ONE_PRODUCT = createActionName('FETCH_ONE_PRODUCT');
 
 /* action creators */
 export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = payload => ({ payload, type: FETCH_ERROR });
-export const fetchOneProduct = payload => ({ payload, type: FETCH_ONE_PRODUCT });
 
 /* thunk creators */
-export const fetchBooks = () => {
+export const fetchRandomQuote = () => {
   return (dispatch, getState) => {
     Axios
-      .get('http://localhost:8000/api/books')
+      .get('http://localhost:8000/api/quotes/random')
       .then(res => {
         console.log('res.data: ', res.data);
         dispatch(fetchSuccess(res.data));
@@ -33,7 +28,7 @@ export const fetchBooks = () => {
       });
   };
 };
-
+/*
 export const fetchProducts = () => {
   return (dispatch, getState) => {
     const { products } = getState();
@@ -63,7 +58,7 @@ export const fetchOneProductFromAPI = (_id) => {
       });
   };
 };
-
+ */
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
@@ -93,16 +88,6 @@ export const reducer = (statePart = [], action = {}) => {
           active: false,
           error: action.payload,
         },
-      };
-    }
-    case FETCH_ONE_PRODUCT: {
-      return {
-        ...statePart,
-        loading: {
-          active: false,
-          error: false,
-        },
-        oneProduct: action.payload,
       };
     }
     default:

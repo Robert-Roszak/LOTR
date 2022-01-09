@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Quote } from '../../features/Quote/Quote';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
@@ -19,6 +21,7 @@ const Component = ({className}) => {
           <a href='/movies'>Show movies</a>
           <a href='/characters'>Show characters</a>
         </Row>
+        <Quote />
       </Container>
     </div>
   );
