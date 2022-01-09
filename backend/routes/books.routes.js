@@ -26,7 +26,7 @@ router.get('/books/:id', async (req, res) => {
     const result = await axios.get(`https://the-one-api.dev/v2/book/${id}/chapter`, {
       headers: headers,
     });
-    if(!result) res.status(404).json({ product: 'Not found' });
+    if(!result) res.status(404).json({ books: 'Not found' });
     else res.json(result.data);
   }
   catch(err) {

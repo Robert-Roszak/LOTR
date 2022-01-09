@@ -14,6 +14,7 @@
     "test": "react-scripts test --noStackTrace",
     "test-all": "react-scripts test --watchAll=false --noStackTrace",
     "test-related": "react-scripts test --watchAll=false --noStackTrace --findRelatedTests",
+    "test-CRUD": "mocha --watch \"./{,!(node_modules|client|dev|src)/**/}*.test.js\"",
     "eject": "react-scripts eject"
   },
   "husky": {
@@ -45,12 +46,15 @@
     "@fortawesome/react-fontawesome": "^0.1.16",
     "axios": "^0.19.0",
     "bootstrap": "5.1.3",
+    "chai": "4.2.0",
+    "chai-http": "4.3.0",
     "clsx": "^1.0.4",
     "cors": "2.8.5",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "express": "4.17.1",
     "express-session": "1.17.0",
+    "mocha": "6.2.1",
     "node-fetch": "2",
     "node-sass": "4.14.1",
     "normalize-css": "^2.3.1",
