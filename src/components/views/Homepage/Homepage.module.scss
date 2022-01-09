@@ -1,4 +1,65 @@
 @import '../../../styles/settings.scss';
 
-/* .root {
-} */
+.root {
+  text-align: center;
+  .title {
+    font-size: 2rem;
+  }
+
+  .imageWrapper {
+    justify-content: center;
+    margin: 30px 0;
+    .image {
+      width: 50%;
+    }
+  }
+
+  .cardTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .iconWrapper {
+      height: 60px;
+      transform: translateX(-100%);
+      color: #2ecc71;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        position: relative;
+      }
+
+      &::before {
+        content: "";
+        border: 1px solid #363636;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 76px;
+        height: 76px;
+        border-radius: 100%;
+        background-color: white;
+        z-index: -1;
+      }
+
+      &::after {
+        content: "";
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #363636;
+      }
+    }
+
+
+  }
+
+
+}

@@ -24,7 +24,7 @@ app.use('/api', chaptersRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {
-  res.status(404).send({ post: 'Not found...' });
+  res.status(404).send({ message: 'Not found...' });
 });
 
 /* REACT WEBSITE */
