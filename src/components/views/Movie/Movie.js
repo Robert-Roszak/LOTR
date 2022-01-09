@@ -30,7 +30,7 @@ const Component = ({className}) => {
       <Container className={clsx(className, styles.root)}>
         <Row className="justify-content-md-center">
           <Col>
-            <p>{details.name}</p>
+            <p><i>{details.name}</i></p>
             <p>Academy Award Nominations: {details.academyAwardNominations}</p>
             <p>Academy Award Wins: {details.academyAwardWins}</p>
             <p>Box Office revenue in millions: ${details.boxOfficeRevenueInMillions}</p>

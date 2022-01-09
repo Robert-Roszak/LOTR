@@ -29,11 +29,11 @@ const Component = ({className}) => {
       <Container className={clsx(className, styles.root)}>
         <Row className="justify-content-md-center">
           <Col key={book._id}>
-            <p>The book has {book.total} chapters</p>
+            <h5>The book has <i><strong>{book.total}</strong></i> chapters</h5>
             {
               book.docs.map((chapter, i) => {
                 return (
-                  <p key={chapter._id}>{i+1}. {chapter.chapterName}</p>
+                  <p key={chapter._id}>{i+1}. <i>{chapter.chapterName}</i></p>
                 );
               })
             }

@@ -31,13 +31,13 @@ const Component = ({className}) => {
           {
             movies.docs.map(movie => {
               return (
-                <Col key={movie._id} xs lg="4">
-                  <Card>
+                <Col key={movie._id} xl="3" lg="4" md="6" sm="12">
+                  <Card className={styles.card}>
                     <Card.Body>
                       <Card.Title>
-                        {movie.name}
+                        <i>{movie.name}</i>
                       </Card.Title>
-                      <Card.Subtitle className="mb-2 text-muted">Rotten Tomatoes score: {parseInt(movie.rottenTomatoesScore)}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">Rotten Tomatoes score: {parseInt(movie.rottenTomatoesScore)}/100</Card.Subtitle>
                       <Card.Text>
                         <Button variant="primary" className={styles.btn} as={NavLink} href={`/movies/${movie._id}`} >Show more info</Button>
                       </Card.Text>

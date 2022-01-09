@@ -6,7 +6,6 @@ const booksRoutes = require('./routes/books.routes');
 const moviesRoutes = require('./routes/movies.routes');
 const charactersRoutes = require('./routes/characters.routes');
 const quotesRoutes = require('./routes/quotes.routes');
-const chaptersRoutes = require('./routes/chapters.routes');
 
 const app = express();
 
@@ -20,7 +19,6 @@ app.use('/api', booksRoutes);
 app.use('/api', moviesRoutes);
 app.use('/api', charactersRoutes);
 app.use('/api', quotesRoutes);
-app.use('/api', chaptersRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {
